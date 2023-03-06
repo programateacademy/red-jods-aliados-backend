@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const aliadosSchema = new mongoose.Schema({
+const ActivitySchema = new mongoose.Schema({
 
     activity_history:{
       type: String
@@ -14,12 +14,11 @@ const aliadosSchema = new mongoose.Schema({
     name:{
       type: String
     },
-
-     organizer: {
-      type: String,
+    organizer: {
+      type: String
     },
     description:{
-      type: String,
+      type: String
     }
 },
   {
@@ -27,4 +26,4 @@ const aliadosSchema = new mongoose.Schema({
     versionKey: false //quita el _V
   })
 
-  module.exports = mongoose.model('aliados',aliadosSchema)
+  module.exports = mongoose.model('Activity', ActivitySchema)

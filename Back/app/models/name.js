@@ -13,17 +13,20 @@ const aliadosSchema = new mongoose.Schema({
     AllianceGoals:{
       type: String
     },
-    Termination: {
-      type: String,
+    start_date:{
+      type: String
     },
-    allySDG:{
-      type: String,
+    Termination_date: {
+      type: String
+    },
+    allyODS:{
+      type: String
     },
     Image:{
-      type: String,
+      type: String
     },
-    modificationdate:{
-      type: String,
+    modification_date:{
+      type: String
     }
 },
   {

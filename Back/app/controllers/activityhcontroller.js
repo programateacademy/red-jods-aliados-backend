@@ -1,38 +1,38 @@
 const { httpError } = require('../helpers/handleError') //funcion sirve para captar erorres
-const nameModel = require('../models/name') //importando modelo recien creado
+const activityhModel = require('../models/activityh') //importando modelo recien creado
 
-const getitems = async (req, res) =>{ //se crea una funcion acincrona para obtener una respuesta de la base de datos
+const items = async (req, res) =>{ //se crea una funcion acincrona para obtener una respuesta de la base de datos
   try {
-    const listAll = await nameModel.find({})
+    const listAll = await activityhModel.find({})
     res.send(listAll)
   } catch (e) {
     httpError(res,e)
   }
 }
 
-const newCharacter = async (req, res) =>{ //se crea una funcion acincrona para obtener una respuesta de la base de datos
+const newActivity = async (req, res) =>{ //se crea una funcion acincrona para obtener una respuesta de la base de datos
   try {
-    const {allyname, description, jbline, AllianGoals, Termination, allySDG, modificationdate} = req.body
-    const Resttype = await nameModel.create ({allyname, description, jbline, AllianGoals, Termination, allySDG, modificationdate})
+    const {activity_history, date, type_activity, name, organizer, description} = req.body
+    const Resttype = await activityhModel.create ({activity_history, date, type_activity, name, organizer, description})
     res.send({ data: Resttype})
   } catch (e) {
     httpError(res,e)
   }
 }
 
-const editAlly = async (req, res) =>{ //se crea una funcion acincrona para obtener una respuesta de la base de datos
+const editActivity = async (req, res) =>{ //se crea una funcion acincrona para obtener una respuesta de la base de datos
   try {
-    const result = await nameModel.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
+    const result = await activityhModel.findOneAndUpdate({_id: req.params.id}, req.body, {new: true})
     res.send({ data: result})
   } catch (e) {
     httpError(res,e)
   }
 }
 
-const deleteAlly = async (req, res) =>{
+const deleteActivity = async (req, res) =>{
   try {
     const itemId = req.params.id;
-    const item = await nameModel.findByIdAndDelete(itemId);
+    const item = await activityhModel.findByIdAndDelete(itemId);
     if (!item) {
       return res.status(404).send({ message: 'Item not found' });
     }
@@ -44,4 +44,4 @@ const deleteAlly = async (req, res) =>{
 
 
 
-module.exports= {getitems, newCharacter, editAlly, deleteAlly}
+module.exports= {items, newActivity, editActivity, deleteActivity}

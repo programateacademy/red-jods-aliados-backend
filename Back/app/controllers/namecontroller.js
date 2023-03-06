@@ -13,7 +13,7 @@ const getitems = async (req, res) =>{ //se crea una funcion acincrona para obten
 const newCharacter = async (req, res) =>{ //se crea una funcion acincrona para obtener una respuesta de la base de datos
   try {
     const {allyname, description, jbline, AllianGoals, Termination, allySDG, modificationdate} = req.body
-    const Resttype = await nameModel.create ({allyname, description, jbline, AllianGoals, Termination, allySDG, modificationdate})
+    const Resttype = await nameModel.create ({allyname, description, jobline,   AllianceGoals, start_date, Termination_date, allyODS, Image, modification_date})
     res.send({ data: Resttype})
   } catch (e) {
     httpError(res,e)
@@ -42,6 +42,6 @@ const deleteAlly = async (req, res) =>{
   }
 }
 
- 
+
 
 module.exports= {getitems, newCharacter, editAlly, deleteAlly}

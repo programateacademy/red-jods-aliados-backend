@@ -25,9 +25,9 @@ const getitem = async(req, res) =>{
 
 const createitem = async (req, res) =>{
   try {
-    const {receipt ,date ,name ,concept ,value} = req.body
+    const {name, username, email, pass, status, role} = req.body
     const resDetail = await userModel.create({
-      receipt ,date ,name ,concept ,value
+      name, username, email, pass, status, role
     })
     res.send({ data: resDetail})
   } catch (e) {
@@ -38,10 +38,10 @@ const createitem = async (req, res) =>{
 const updateitem = async (req, res) =>{
   try {
     const itemId = req.params.id;
-    const { receipt, date, name, concept, value } = req.body;
+    const {name, username, email, pass, status, role} = req.body;
     const item = await userModel.findByIdAndUpdate(
       itemId,
-      { receipt, date, name, concept, value },
+      {name, username, email, pass, status, role},
       { new: true }
     );
     if (!item) {

@@ -2,6 +2,7 @@ const { httpError } = require('../helpers/handleError')
 const { encrypt, compare} = require('../helpers/handleBcrypt')
 const { tokenSign } = require('../helpers/generateToken')
 const userModel = require('../models/user')
+const emailer = require('../helpers/emailer')
 
 const loginCtrl = async (req, res) => {
   try {
@@ -73,7 +74,7 @@ const registerCtrl = async (req, res) => {
             pass: passHash,
             status
         })
-
+        emailer.sendMail(registerUser)
         res.send( registerUser )
 
     } catch (e) {

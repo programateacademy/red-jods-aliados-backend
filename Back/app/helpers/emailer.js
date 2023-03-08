@@ -5,8 +5,8 @@ const createtrans =()=>{
     service: 'gmail',
     secure: true,
     auth:{
-      user: 'lesthercrespo@gmail.com',
-      pass: 'pjvmejmkujfvdlrc'
+      user:  process.env.COREO_TEST,
+      pass:  process.env.PASS_CORREO,
     }
   })
   return transport

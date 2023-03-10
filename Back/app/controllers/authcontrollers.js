@@ -3,12 +3,14 @@ const { encrypt, compare} = require('../helpers/handleBcrypt')
 const { tokenSign } = require('../helpers/generateToken')
 const userModel = require('../models/user')
 const emailer = require('../helpers/emailer')
+//const { sendPasswordResetEmail } = require('../controllers/recoverytokencontrollers')
+
 
 const loginCtrl = async (req, res) => {
   try {
-      const { username, pass} = req.body
+      const { email, pass} = req.body
 
-      const user = await userModel.findOne({ username })
+      const user = await userModel.findOne({ email })
 
       if (!user) {
           res.status(404)
@@ -19,17 +21,19 @@ const loginCtrl = async (req, res) => {
       if (user.status === 'disabled') {
         res.status(401)
         res.send({ error: 'User is disabled' })
+        //sendPasswordResetEmail(user)
         return
       }
 
       const checkPassword = await compare(pass, user.pass)
 
-      const tokenSession = await tokenSign(user)
+      //const tokenSession = await tokenSign(user)
 
       if (checkPassword) {
           res.send({
               data: user,
-              tokenSession
+              //tokenSession
+              message: 'Login successful'
           })
           return
       }
@@ -37,18 +41,18 @@ const loginCtrl = async (req, res) => {
 
       if (checkPassword) {
           // Si la contraseña es correcta, restablecer el contador de intentos fallidos
-          await userModel.updateOne({ username }, { failedLoginAttempts: 0 })
+          await userModel.updateOne({ email }, { failedLoginAttempts: 0 })
           res.send({ user })
           return
       }
 
       // Si la contraseña es incorrecta, incrementar el contador de intentos fallidos
       const newFailedAttempts = (user.failedLoginAttempts || 0) + 1
-      await userModel.updateOne({ username }, { failedLoginAttempts: newFailedAttempts })
+      await userModel.updateOne({ email }, { failedLoginAttempts: newFailedAttempts })
 
       if (newFailedAttempts >= 3) {
           // Si el usuario ha alcanzado el límite de intentos fallidos, deshabilitarlo
-          await userModel.updateOne({ username }, { status: 'disabled' })
+          await userModel.updateOne({ email }, { status: 'disabled' })
           res.status(401)
           res.send({ error: 'User disabled due to too many failed login attempts' })
           return

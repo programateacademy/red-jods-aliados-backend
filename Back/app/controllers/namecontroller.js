@@ -13,7 +13,7 @@ const getitems = async (req, res) =>{ //se crea una funcion acincrona para obten
 const getitem = async(req, res) =>{
   try {
     const itemId = req.params.id;
-    const item = await userModel.findById(itemId);
+    const item = await nameModel.findById(itemId);
     if (!item) {
       return res.status(404).send({ message: 'Item not found' });
     }

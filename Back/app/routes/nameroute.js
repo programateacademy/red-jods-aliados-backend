@@ -1,10 +1,11 @@
 const express = require('express') //importar express
 const router = express.Router() //importando routes de express
-const {getitems, newCharacter, editAlly, deleteAlly} = require('../controllers/namecontroller')
+const {getitems,getitem, newCharacter, editAlly, deleteAlly} = require('../controllers/namecontroller')
 
-router.get('/', getitems) //obtiene todos los aliados
-router.post('/newCharacter', newCharacter)
-router.put('/editAlly/:id', editAlly)
-router.delete('/deleteAlly/:id', deleteAlly)
+router.get('/', getitems)
+router.get('/:id', getitem) //obtiene todos los aliados
+router.post('/', newCharacter)
+router.put('/:id', editAlly)
+router.delete('/:id', deleteAlly)
 
 module.exports = router

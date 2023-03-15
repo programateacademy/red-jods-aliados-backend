@@ -10,6 +10,19 @@ const getitems = async (req, res) =>{ //se crea una funcion acincrona para obten
   }
 }
 
+const getitem = async(req, res) =>{
+  try {
+    const itemId = req.params.id;
+    const item = await userModel.findById(itemId);
+    if (!item) {
+      return res.status(404).send({ message: 'Item not found' });
+    }
+    res.send({ data: item });
+  } catch (e) {
+    httpError(res, e);
+  }
+}
+
 const newCharacter = async (req, res) => {
   try {
     const {
@@ -85,4 +98,4 @@ const deleteAlly = async (req, res) =>{
 
 
 
-module.exports= {getitems, newCharacter, editAlly, deleteAlly}
+module.exports= {getitems, getitem, newCharacter, editAlly, deleteAlly}

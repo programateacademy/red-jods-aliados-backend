@@ -16,7 +16,7 @@ const aliadosSchema = new mongoose.Schema({
     email:{
       type: String
     },
-    respnsible: {
+    responsible: {
       type: String
     },
     eje:{
@@ -25,7 +25,7 @@ const aliadosSchema = new mongoose.Schema({
     description:{
       type: String
     },
-    objetives:{
+    objectives:{
       type: String
     },
     date_start:{
@@ -40,7 +40,7 @@ const aliadosSchema = new mongoose.Schema({
     status:{
       type: String
     },
-    addres:{
+    address:{
       type: String
     },
     twitter:{

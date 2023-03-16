@@ -4,7 +4,7 @@ const userModel = require('../models/user');
 
 const recoverytoken = async (req, res) => {
   try {
-    const { token } = req.query;
+    const { token } = req.params;
     const { pass } = req.body;
 
     const user = await userModel.findOne({ resetToken: token });

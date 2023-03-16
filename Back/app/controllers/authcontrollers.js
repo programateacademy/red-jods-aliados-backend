@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken')
 const { httpError } = require('../helpers/handleError')
 const { encrypt, compare} = require('../helpers/handleBcrypt')
 const { tokenSign } = require('../helpers/generateToken')
@@ -19,20 +20,20 @@ const loginCtrl = async (req, res) => {
       }
 
       if (user.status === 'disabled') {
-        res.status(401)
-        res.send({ error: 'User is disabled' })
-        //sendPasswordResetEmail(user)
-        return
+        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        emailer.recoveryemail(user, token)
+        res.status(401).send({ error: 'User is disabled', token });
+        return;
       }
 
       const checkPassword = await compare(pass, user.pass)
 
-      //const tokenSession = await tokenSign(user)
+      const tokenSession = await tokenSign(user)
 
       if (checkPassword) {
           res.send({
               data: user,
-              //tokenSession
+              tokenSession,
               message: 'Login successful'
           })
           return

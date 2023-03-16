@@ -6,9 +6,9 @@ const {getitem, getitems, createitem, updateitem, deleteitem} = require('../cont
 
 
 router.get('/' ,checkAuth,checkRoleAuth(['admin']), getitems)
-router.get('/:id', getitem)
-router.post('/', createitem)
-router.patch('/:id', updateitem)
-router.delete('/:id', deleteitem)
+router.get('/:id',checkAuth,checkRoleAuth(['admin']), getitem)
+router.post('/',checkAuth,checkRoleAuth(['admin']), createitem)
+router.patch('/:id', checkAuth,checkRoleAuth(['admin']), updateitem)
+router.delete('/:id', checkAuth,checkRoleAuth(['admin']), deleteitem)
 
 module.exports = router

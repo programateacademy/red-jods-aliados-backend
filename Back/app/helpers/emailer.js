@@ -25,5 +25,18 @@ const createtrans =()=>{
   return
  }
 
+ const recoveryemail = async (user, token) =>{
+  const transporter = createtrans()
+  const info = await transporter.sendMail({
+    from: '<lesthercrespo@gmail.com>', // sender address
+    to: `${user.email}`, // list of receivers
+    subject: "Correo de recuperacion", // Subject line
+    text: `Hello world? ${user.name} este mensaje a sido enviado desde node http://localhost:3000/recoverytoken/recovery/${token}`, // plain text body
+  });
+  console.log("Message sent: %s", info.messageId);
+  return
+ }
+
 
 exports.sendMail =(user)=>sendMail(user)
+exports.recoveryemail =(user, token)=>recoveryemail(user, token)

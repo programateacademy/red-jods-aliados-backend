@@ -4,12 +4,12 @@ const userModel = require('../models/user')
 
 const checkRoleAuth = (roles) => async (req, res, next) => {
     try {
-        const token = req.headers.authorization.split(' ').pop() //TODO: 231231321
+        const token = req.headers.authorization.split(' ').pop()
         const tokenData = await verifyToken(token)
-        const userData = await userModel.findById(tokenData._id) //TODO: 696966
+        const userData = await userModel.findById(tokenData._id)
 
-        //TODO ['user'].includes('user')
-        if ([].concat(roles).includes(userData.role)) { //TODO:
+
+        if ([].concat(roles).includes(userData.role)) {
             next()
         } else {
             res.status(409)

@@ -5,7 +5,7 @@ const checkRoleAuth = require('../middleware/roleAuth')
 const {getitem, getitems, createitem, updateitem, deleteitem} = require('../controllers/usercontrollers')
 
 
-router.get('/' ,checkAuth,checkRoleAuth(['admin']), getitems)
+router.get('/' , getitems)
 router.get('/:id', getitem)
 router.post('/', createitem)
 router.patch('/:id', updateitem)

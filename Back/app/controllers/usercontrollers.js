@@ -9,27 +9,39 @@ const getitems = async (req, res) =>{
     httpError(res,e)
   }
 }
-
-const getitem = async(req, res) =>{
-  try {
-    const itemId = req.params.id;
-    const item = await userModel.findById(itemId);
-    if (!item) {
-      return res.status(404).send({ message: 'Item not found' });
-    }
-    res.send({ data: item });
-  } catch (e) {
-    httpError(res, e);
-  }
+//prueba de paginación
+const options = {
+  page:1,
+  limit:10
 }
+exports.getitem = (req, res) => {
+  model.paginate({}, options, (err, docs) => {
+    res.send({
+      items:docs
+    })
+  })
+}
+
+// const getitem = async(req, res) =>{
+//   try {
+//     const itemId = req.params.id;
+//     const item = await userModel.findById(itemId);
+//     if (!item) {
+//       return res.status(404).send({ message: 'Item not found' });
+//     }
+//     res.send({ data: item });
+//   } catch (e) {
+//     httpError(res, e);
+//   }
+// }
 
 const createitem = async (req, res) =>{
   try {
-    const {receipt ,date ,name ,concept ,value} = req.body
+    const {name, username, email, pass, status} = req.body
     const resDetail = await userModel.create({
       receipt ,date ,name ,concept ,value
     })
-    res.send({ data: resDetail})
+    res.send({  resDetail})
   } catch (e) {
     httpError(res,e)
   }

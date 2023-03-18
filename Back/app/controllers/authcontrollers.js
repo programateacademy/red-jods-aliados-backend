@@ -21,8 +21,9 @@ const loginCtrl = async (req, res) => {
 
       if (user.status === 'disabled') {
         const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '10m' });
-        emailer.recoveryemail(user, token)
-        res.status(401).send({ error: 'User is disabled', token });
+        await userModel.updateOne({ _id: user._id }, { resetToken: token });
+        emailer.recoveryemail(user, token);
+        res.status(403).send({ message: 'User is disabled. Check your email to recover your account.' });
         return;
       }
 

@@ -9,9 +9,8 @@ const { dbConnect } = require('./config/mongo') //requiere la conexion
 app.use(cors())
 app.use(express.json()) //permite envie de datos
 
-app.use('/', require('./app/routes')) //ruta de la api
-app.use(express.static(path.join(__dirname,'public')))
 
+app.use('/', require('./app/routes')) //ruta de la api
 
 dbConnect()
 app.listen(PORT, ()=>{ //Api escuchando

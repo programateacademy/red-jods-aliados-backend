@@ -1,6 +1,7 @@
 const { httpError } = require('../helpers/handleError');
 const { encrypt } = require('../helpers/handleBcrypt');
 const userModel = require('../models/user');
+const path = require('path');
 
 const recoverytoken = async (req, res) => {
   try {
@@ -21,8 +22,10 @@ const recoverytoken = async (req, res) => {
       failedLoginAttempts: 0,
       resetToken: null // Borrar el token después de actualizar la contraseña
     });
-
     res.send({ message: 'Contraseña actualizada correctamente' });
+
+
+
   } catch (error) {
     httpError(res, error);
   }

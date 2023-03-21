@@ -8,9 +8,9 @@
 </head>
 <body>
   <h1>Actualizar Contraseña</h1>
-  <form action="/recoverytoken/recovery/token" method="POST">
-    <label for="password">Nueva Contraseña:</label>
-    <input type="password" id="pass" name="pass" required>
+  <form action="/recovery/reset/<%= url %>" method="POST">
+    <label for="pass">Nueva Contraseña:</label>
+    <input id="pass" name="pass" required>
     <button type="submit">Actualizar Contraseña</button>
   </form>
 </body>

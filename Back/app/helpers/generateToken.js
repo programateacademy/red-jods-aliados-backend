@@ -12,6 +12,17 @@ const tokenSign = async (user) => { //Genera Token
         }
     );
 }
+const tokenReset = async (user) => {
+  return jwt.sign(
+      {
+          _id: user._id,
+      },
+      process.env.JWT_SECRET,
+      {
+          expiresIn: "5min",
+      }
+  );
+}
 
 const verifyToken = async (token) => {
     try {
@@ -27,4 +38,4 @@ const decodeSign = (token) => { //TODO: Verificar que el token sea valido y corr
 
 
 
-module.exports = { tokenSign, decodeSign, verifyToken }
+module.exports = { tokenSign,  tokenReset, decodeSign, verifyToken }

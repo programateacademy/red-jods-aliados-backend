@@ -1,10 +1,8 @@
-const jwt = require('jsonwebtoken')
 const { httpError } = require('../helpers/handleError')
 const { encrypt, compare} = require('../helpers/handleBcrypt')
-const { tokenSign } = require('../helpers/generateToken')
+const { tokenSign, tokenReset } = require('../helpers/generateToken')
 const userModel = require('../models/user')
 const emailer = require('../helpers/emailer')
-//const { sendPasswordResetEmail } = require('../controllers/recoverytokencontrollers')
 
 
 const loginCtrl = async (req, res) => {
@@ -18,12 +16,13 @@ const loginCtrl = async (req, res) => {
           res.send({ error: 'User not found' })
           return
       }
+      const tokenReseto = await tokenReset(user)
 
       if (user.status === 'disabled') {
-        const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '10m' });
-        await userModel.updateOne({ _id: user._id }, { resetToken: token });
-        emailer.recoveryemail(user, token);
-        res.status(403).send({ message: 'User is disabled. Check your email to recover your account.' });
+        res.status(403).send({
+          tokenReseto,
+          message: 'User is disabled. Check your email to recover your account.'});
+        emailer.recoveryemail(user,tokenReseto);
         return;
       }
 
@@ -35,7 +34,6 @@ const loginCtrl = async (req, res) => {
           res.send({
               data: user,
               tokenSession,
-              message: 'Login successful'
           })
           return
       }
@@ -45,6 +43,7 @@ const loginCtrl = async (req, res) => {
           // Si la contraseña es correcta, restablecer el contador de intentos fallidos
           await userModel.updateOne({ email }, { failedLoginAttempts: 0 })
           res.send({ user })
+
           return
       }
 

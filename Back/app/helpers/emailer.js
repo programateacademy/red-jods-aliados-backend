@@ -29,19 +29,18 @@ const createtrans =()=>{
   return
  }
 
- const recoveryemail = async (user, token) =>{
+ const recoveryemail = async (user, tokenReseto) =>{
   const transporter = createtrans()
   //const template = fs.readFileSync('./templateRecovery.html', 'utf8');
   const info = await transporter.sendMail({
     from: '<lesthercrespo@gmail.com>', // sender address
     to: `${user.email}`, // list of receivers
-    subject: "Correo de recuperacion", // Subject line
-    html: template.replace('{{link}}', `http://localhost:3000/recoverytoken/update-password/${token}`),
+    html: template.replace('{{link}}', `http://localhost:3000/recovery/updatepass/${tokenReseto}`),
   });
-  console.log("Message sent: %s", info.messageId);
+  console.log("Message sent: %s", info.messageId , tokenReseto);
   return
  }
 
 
 exports.sendMail =(user)=>sendMail(user)
-exports.recoveryemail =(user, token)=>recoveryemail(user, token)
+exports.recoveryemail =(user,tokenReseto)=>recoveryemail(user,tokenReseto)

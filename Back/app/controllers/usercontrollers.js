@@ -25,7 +25,7 @@ const getitem = async(req, res) =>{
 
 const createitem = async (req, res) =>{
   try {
-    const {name, username, email, pass, status, role} = req.body
+    const {name, email, pass, status, role} = req.body
     const resDetail = await userModel.create({
       name, username, email, pass, status, role
     })
@@ -38,7 +38,7 @@ const createitem = async (req, res) =>{
 const updateitem = async (req, res) =>{
   try {
     const itemId = req.params.id;
-    const {name, username, email, pass, status, role} = req.body;
+    const {name, email, pass, status, role} = req.body;
     const item = await userModel.findByIdAndUpdate(
       itemId,
       {name, username, email, pass, status, role},

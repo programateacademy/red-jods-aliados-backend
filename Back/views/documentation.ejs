@@ -1,0 +1,42 @@
+<%- include("templates/cabecera") %>
+
+    <div style="display: flex">
+      <%- include("templates/navbar") %>
+      <div
+        style="
+          width: 60%;
+          border-left: 1px solid gray;
+          padding: 1%;
+          margin-left: 35%;">
+          <!-- introduccion -->
+          <%- include("section/section1") %>
+          <!-- bibliotecas -->
+          <%- include("section/section2") %>
+          <!-- instalacion -->
+          <%- include("section/section3") %>
+          <!-- variables de entorno -->
+          <%- include("section/section4") %>
+          <!-- estructura de carpetas -->
+          <%- include("section/section5") %>
+          <!-- jerarquia -->
+          <%- include("section/section6") %>
+          <!-- configuracion para el mongo -->
+          <%- include("section/section7") %>
+          <!-- ruta principal de la conexion -->
+          <%- include("section/section8") %>
+          <!-- rutas -->
+          <%- include("section/section9") %>
+          <!-- modelos -->
+          <%- include("section/section10") %>
+          <!-- middleware -->
+          <%- include("section/section11") %>
+          <!-- funcion para encriptar -->
+          <%- include("section/section12") %>
+          <!-- generar tokens -->
+          <%- include("section/section13") %>
+          <!-- funcion para enviar correos -->
+          <%- include("section/section14") %>
+      </div>
+    </div>
+  </body>
+</html>

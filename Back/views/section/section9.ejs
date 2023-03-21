@@ -1,0 +1,198 @@
+<section id="router" style="border-top: 1px solid gray">
+  <div>
+    <h3>Rutas</h3>
+    <h4>Ruta principal de la conexion</h4>
+    <pre><code>
+const express = require('express')
+const router = express.Router()
+const fs = require('fs') //lee el directorio donde se encuentra
+
+const pathRouter = `${__dirname}`
+
+const removeExtension = (fileName) =>{
+return fileName.split('.').shift()
+}
+
+fs.readdirSync(pathRouter).filter((file)=>{
+const fileWithOutExt = removeExtension(file)
+const skip = ['index'].includes(fileWithOutExt)
+if (!skip) {
+router.use(`/${fileWithOutExt}`, require(`./${fileWithOutExt}`))
+console.log('cargar ruta---------->',fileWithOutExt)
+}
+
+})
+    </code></pre>
+    <p>
+      En este archivo utilizamos el framework Express para crear un
+      enrutador que maneja diferentes rutas. El código primero importa
+      las dependencias necesarias, incluyendo Express y el módulo File
+      System (fs) para leer el directorio donde se encuentra el archivo
+      actual.<br />
+
+      <br />La variable pathRouter almacena la ruta absoluta del
+      directorio donde se encuentra el archivo actual mediante la
+      constante __dirname.<br />
+
+      <br />La función removeExtension es una función de ayuda que toma
+      un nombre de archivo como entrada y devuelve el mismo nombre de
+      archivo sin su extensión.<br />
+
+      <br />La función readdirSync de la dependencia fs se utiliza para
+      leer el directorio especificado por la ruta pathRouter y devuelve
+      una lista de nombres de archivo en ese directorio. La función
+      filter se utiliza para filtrar los nombres de archivo y omitir
+      aquellos que tienen un nombre que coincide con la cadena
+      'index'.<br />
+
+      <br />Si el nombre de archivo no coincide con 'index', el código
+      registra la ruta en el enrutador utilizando la función use de
+      Express. Esta función agrega una función middleware que se activa
+      cuando se accede a una ruta específica. En este caso, la función
+      middleware se carga dinámicamente a partir del archivo que
+      coincide con el nombre de archivo sin su extensión.<br />
+
+      <br />Finalmente, el código muestra en la consola el mensaje
+      'cargar ruta' seguido del nombre de archivo que se ha cargado.
+      Esto ayuda a rastrear las rutas que se han cargado dinámicamente.
+    </p>
+    <p
+      style="
+        border: 1px solid #4caf50;
+        background-color: #77ad79;
+        border-radius: 10px;
+        padding: 10px;
+        color: white;
+      "
+    >
+      <strong>Nota:</strong> Si deseas agregar nuevas rutas para nuevas
+      funcionalidades de la api solo tienes que agrer otro archivo
+      dentro de la carpeta routes con la configuración comun de rutas y
+      otro controlador haciendo la api escalable para nuevos
+      desarrolladores
+    </p>
+    <h4>Estructura de Rutas comunes del CRUD</h4>
+    <pre><code>
+const express = require('express') //importar express
+const router = express.Router() //importando routes de express
+const checkAuth = require('../middleware/auth')
+const checkRoleAuth = require('../middleware/roleAuth')
+const {getitems,getitem, newCharacter, editAlly, deleteAlly} = require('../controllers/namecontroller')
+
+router.get('/',checkAuth,checkRoleAuth(['admin']), getitems)
+router.get('/:id',checkAuth,checkRoleAuth(['admin']), getitem)
+router.post('/',checkAuth,checkRoleAuth(['admin']), newCharacter)
+router.put('/:id',checkAuth,checkRoleAuth(['admin']), editAlly)
+router.delete('/:id', checkAuth,checkRoleAuth(['admin']), deleteAlly)
+
+module.exports = router
+    </code></pre>
+    <p>
+      El código importa la dependencia Express y crea un objeto
+      enrutador utilizando la función Router de Express. También importa
+      algunos middlewares (checkAuth y checkRoleAuth) y algunas
+      funciones controladoras (getitems, getitem, newCharacter, editAlly
+      y deleteAlly) que se encargan de manejar las solicitudes HTTP para
+      diferentes rutas.<br />
+
+      <br />Las rutas se definen utilizando los métodos HTTP get, post,
+      put y delete que son accesibles a través del objeto enrutador.
+      Cada ruta se define con una dirección URL que se corresponde con
+      una función controladora que se ejecuta cuando se accede a esa
+      ruta.<br />
+
+      <br />Cada ruta también tiene uno o más middlewares (checkAuth y
+      checkRoleAuth) que se ejecutan antes de la función controladora.
+      Estos middlewares se encargan de autenticar y autorizar al usuario
+      antes de permitirles acceder a la ruta.
+    </p>
+    <h4>Rutas personalizadas: Recuperar tokens para restablecer contraseña</h4>
+    <p></p>
+  </div>
+  <div>
+    <h3>Controladores</h3>
+    <h4>Estructura de controladores comunes del CRUD</h4>
+    <pre><code>
+const { httpError } = require('../helpers/handleError')
+const userModel = require('../models/user')
+
+const getitems = async (req, res) =>{
+try {
+const listAll = await userModel.find({})
+res.send(listAll)
+} catch (e) {
+httpError(res,e)
+}
+}
+
+const getitem = async(req, res) =>{
+try {
+const itemId = req.params.id;
+const item = await userModel.findById(itemId);
+if (!item) {
+return res.status(404).send({ message: 'Item not found' });
+}
+res.send({ data: item });
+} catch (e) {
+httpError(res, e);
+}
+}
+
+const createitem = async (req, res) =>{
+try {
+const {name, username, email, pass, status, role} = req.body
+const resDetail = await userModel.create({
+name, username, email, pass, status, role
+})
+res.send({ data: resDetail})
+} catch (e) {
+httpError(res,e)
+}
+}
+
+const updateitem = async (req, res) =>{
+try {
+const itemId = req.params.id;
+const {name, username, email, pass, status, role} = req.body;
+const item = await userModel.findByIdAndUpdate(
+itemId,
+{name, username, email, pass, status, role},
+{ new: true }
+);
+if (!item) {
+return res.status(404).send({ message: 'Item not found' });
+}
+res.send({ data: item });
+} catch (e) {
+httpError(res, e);
+}
+}
+
+const deleteitem = async (req, res) =>{
+try {
+const itemId = req.params.id;
+const item = await userModel.findByIdAndDelete(itemId);
+if (!item) {
+return res.status(404).send({ message: 'Item not found' });
+}
+res.send({ data: item });
+} catch (e) {
+httpError(res, e);
+}
+}
+
+module.exports= {getitem, getitems, createitem, updateitem, deleteitem}
+
+    </code></pre>
+    <p>Este es un código en Node.js que exporta varias funciones para manejar diferentes solicitudes HTTP relacionadas con la manipulación de datos de usuarios.<br>
+
+      <br>Las funciones controladoras son getitems, getitem, createitem, updateitem y deleteitem. Cada una de ellas maneja una operación diferente en la base de datos de usuarios.<br>
+
+      <br>La función getitems busca y devuelve todos los registros de usuario en la base de datos. La función getitem busca y devuelve un registro de usuario específico según el ID proporcionado. La función createitem crea un nuevo registro de usuario en la base de datos. La función updateitem actualiza un registro de usuario existente según el ID proporcionado. La función deleteitem elimina un registro de usuario existente según el ID proporcionado.<br>
+
+      <br>Cada una de estas funciones utiliza una llamada asincrónica a la base de datos y devuelve una respuesta HTTP en función del resultado de la operación. Si la operación tiene éxito, devuelve un objeto de datos en la respuesta HTTP. Si hay un error, la función httpError maneja la respuesta de error para devolver una respuesta HTTP con el código de error y el mensaje de error correspondientes.</p>
+    <h4>Controladores personalizados: Autentificación de usuarios</h4>
+    <p></p>
+    <h4>Controladores personalizados: Recuperación de contraseña</h4>
+  </div>
+</section>

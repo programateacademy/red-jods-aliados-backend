@@ -1,0 +1,57 @@
+<section id="mainconection" style="border-top: 1px solid gray">
+  <h2>Archivo principal de la conexión</h2>
+  <pre><code>
+require('dotenv').config()//variables de entorno
+const express = require('express')
+const cors = require('cors')
+const path =require('path')
+const app = express()
+const PORT = process.env.PORT || 3000 //puerto declarado en la variable de entorno
+const { dbConnect } = require('./config/mongo') //requiere la conexion
+
+app.use(cors())
+app.use(express.json()) //permite envie de datos
+
+app.use('/', require('./app/routes')) //ruta de la api
+
+dbConnect()
+app.listen(PORT, ()=>{ //Api escuchando
+console.log('api lista por el puerto', PORT)
+})
+  </code></pre>
+  <p>
+    Primero, se importan los módulos dotenv, express, cors y path con
+    las líneas require('dotenv').config(), const express =
+    require('express'), const cors = require('cors') y const path
+    =require('path') respectivamente. dotenv se utiliza para cargar las
+    variables de entorno del archivo .env, express es el framework
+    utilizado para crear la API, cors se utiliza para permitir
+    peticiones desde distintos orígenes y path se utiliza para manejar
+    rutas de archivos.<br />
+    <br />Luego, se crea la instancia de express con la línea const app
+    = express(). Se define el puerto en la variable PORT, el cual puede
+    ser un valor definido en la variable de entorno process.env.PORT o
+    3000 en caso de que no se haya definido.<br />
+    <br />A continuación, se importa la función dbConnect del archivo
+    ./config/mongo con la línea const { dbConnect } =
+    require('./config/mongo'), la cual se encarga de conectar la API a
+    la base de datos.<br />
+    <br />Se utiliza app.use() para cargar los middlewares cors() y
+    express.json(). cors() se utiliza para permitir peticiones desde
+    distintos orígenes y express.json() para permitir el envío de datos
+    en formato JSON.<br />
+    <br />Luego, se utiliza app.use() para cargar las rutas de la API,
+    que se encuentran en el archivo ./app/routes.<br />
+    <br />Se realiza la conexión a la base de datos mediante la función
+    dbConnect(). <br />
+    <br />Por último, se inicia el servidor de la API con la función
+    app.listen(), la cual recibe como argumento el número de puerto y
+    una función de callback que se ejecuta cuando el servidor está listo
+    para recibir peticiones.<br />
+    <br />Este código utiliza Express para crear una API REST y
+    conectarla a una base de datos MongoDB mediante mongoose. También
+    utiliza middlewares como cors() y express.json() para permitir
+    peticiones desde distintos orígenes y el envío de datos en formato
+    JSON.
+  </p>
+</section>

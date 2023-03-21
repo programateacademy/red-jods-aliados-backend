@@ -1,0 +1,41 @@
+<section id="mongo" style="border-top: 1px solid gray">
+  <h2>Configuración para la conexion con mongo atlas</h2>
+  <pre><code>
+const mongoose = require('mongoose');
+
+mongoose.set('strictQuery', true);
+const dbConnect = ()=>{
+const DB_URI = process.env.DB_URI //Se conecta a la url
+mongoose.connect(DB_URI, {
+useNewUrlParser: true,
+useUnifiedTopology: true
+}, (err, res)=>{
+if(!err){
+  console.log('***CONEXION CORRECTA***')
+}else{
+  console.log('***ERROR DE CONEXION***' + err)
+}
+})
+
+}
+module.exports = { dbConnect }
+  </code></pre>
+  <p>
+    En primer lugar, se importa el módulo mongoose con la línea const
+    mongoose = require('mongoose');. <br />
+    <br />Luego, se configura mongoose para que sea estricto en la
+    validación de consultas a la base de datos con la línea
+    mongoose.set('strictQuery', true);.<br />
+    <br />Después se define la función dbConnect, la cual se encarga de
+    realizar la conexión a la base de datos. Esta función utiliza la URL
+    de la base de datos que se obtiene de la variable de entorno DB_URI.
+    La función mongoose.connect() se utiliza para conectarse a la base
+    de datos y se especifican las opciones useNewUrlParser y
+    useUnifiedTopology para evitar posibles errores de conexión.<br />
+    <br />Finalmente, la función dbConnect es exportada para poder ser
+    utilizada en otros archivos. <br />Es importante tener en cuenta que
+    la conexión a la base de datos es asincrónica, por lo que se
+    recomienda utilizar promesas o async/await para manejarla
+    correctamente.
+  </p>
+</section>

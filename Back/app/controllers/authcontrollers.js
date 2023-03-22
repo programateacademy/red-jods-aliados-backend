@@ -34,6 +34,7 @@ const loginCtrl = async (req, res) => {
           res.send({
               data: user,
               tokenSession,
+              message: user.name
           })
           return
       }

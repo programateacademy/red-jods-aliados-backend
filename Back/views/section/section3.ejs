@@ -1,28 +1,34 @@
-<section id="instalacion" style="border-top: 1px solid gray">
+<section id="instalacion" style="border-top: 1px solid gray;
+color: white;
+padding: 5%;">
   <h2>Instalacion</h2>
-  <p>
+  <p style="padding: 2%;  line-height: 30px;">
+    Clonar el repositorio desde el directorio</p>
+  <pre><code style="letter-spacing: 1px; color: orange;"
+    >git clone  https://github.com/programateacademy/red-jods-aliados-backend.git </code></pre>
+
+  <p style="padding: 2%;  line-height: 30px;">
     Se recomienda utilizar nodemon, utiliza el siguiente comando para
     instalarlo como dependencia de desarrollo
   </p>
   <pre><code>npm install nodemon --save-dev</code></pre>
-  <button onclick="copiarCodigo()">Copiar</button>
-  <p>Luego de clonar el repositorio desde el directorio</p>
-  <pre><code>git clone  https://github.com/programateacademy/red-jods-aliados-backend.git </code></pre>
-  <button onclick="copiarCodigo()">Copiar</button>
-  <p>En el directorio que acabas de instalar ejecuta</p>
-  <pre><code>cd Back//mueve a la carpeta principal
-npm install //instala todas las dependencias </code></pre>
-  <button onclick="copiarCodigo()">Copiar</button>
-  <p>luego ya puedes correr el codigo</p>
-  <pre><code>nodemon app //si instalaste nodemon
+
+  <p style="padding: 2%;  line-height: 30px;">
+    En el directorio que acabas de instalar ejecuta</p>
+  <pre><code>cd Back <strong style="font-weight: normal; color: green;">//mueve a la carpeta principal</strong> </code></pre>
+  <pre><code>npm install <strong style="font-weight: normal; color: green;">//instala todas las dependencias</strong> </code></pre>
+
+  <p style="padding: 2%;  line-height: 30px;">luego ya puedes correr el codigo</p>
+  <pre><code style="color: green;">
+nodemon app //si instalaste nodemon
 node app// sin nodemon
   </code></pre>
-  <button onclick="copiarCodigo()">Copiar</button>
-  <p>
+  <p style="padding: 2%;  line-height: 30px;">
     En consola debe salirte algo asi, donde se muestren todas las rutas
     de la api
   </p>
-  <pre><code>[nodemon] starting `node app`
+  <pre><code style="color: white;">
+<strong style="color: green;">[nodemon] starting `node app`</strong>
 cargar ruta----------> auth
 cargar ruta----------> doc
 cargar ruta----------> nameroute

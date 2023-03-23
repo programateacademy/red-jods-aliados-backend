@@ -5,7 +5,7 @@ const checkAuth = async (req, res, next) => {
         const token = req.params.token
         const tokenData = await verifyToken(token)
         console.log(tokenData)
-        if (tokenData._id) {
+        if (tokenData) {
             next()
         } else {
             res.status(409)

@@ -1,0 +1,65 @@
+<section id="correos" style="border-top: 1px solid gray;color: white;
+padding: 5%;">  <h2>Funcion para enviar correo</h2>
+  <pre style="margin-top: 1%;"><code>
+const nodemailer = require("nodemailer");
+const fs = require('fs');
+const path = require('path');
+const templatePath = path.join(__dirname, '../templates/templateRecovery.html');
+const template = fs.readFileSync(templatePath, 'utf8');
+const templatePath1 = path.join(__dirname, '../templates/templateWelcome.html');
+const template1 = fs.readFileSync(templatePath1, 'utf8');
+const createtrans =()=>{
+  const transport = nodemailer.createTransport({
+    service: 'gmail',
+    secure: true,
+    auth:{
+      user:  process.env.COREO_TEST,
+      pass:  process.env.PASS_CORREO,
+    }
+  })
+  return transport
+}
+
+ const sendMail = async (user) =>{
+  const transporter = createtrans()
+  const info = await transporter.sendMail({
+    from: '<lesthercrespo@gmail.com>', // sender address
+    to: `${user.email}`, // list of receivers
+    subject: "Bienvenido al sistema", // Subject line
+    html: template1
+    });
+  console.log("Message sent: %s", info.messageId);
+  return
+ }
+
+ const recoveryemail = async (user, tokenReseto) =>{
+  const transporter = createtrans()
+  //const template = fs.readFileSync('./templateRecovery.html', 'utf8');
+  const info = await transporter.sendMail({
+    from: '<lesthercrespo@gmail.com>', // sender address
+    to: `${user.email}`, // list of receivers
+    html: template.replace('{{link}}', `http://localhost:3000/recovery/updatepass/${tokenReseto}`),
+  });
+  console.log("Message sent: %s", info.messageId , tokenReseto);
+  return
+ }
+
+
+exports.sendMail =(user)=>sendMail(user)
+exports.recoveryemail =(user,tokenReseto)=>recoveryemail(user,tokenReseto)
+  </code></pre>
+  <p style="padding: 2%;  line-height: 30px;">
+    Este código utiliza el módulo nodemailer para enviar correos electrónicos. nodemailer es un módulo de Node.js que permite enviar correos electrónicos directamente desde una aplicación. <br>
+
+    <br>El código define las siguientes funciones:<br>
+
+    <br>createtrans: Esta función crea un objeto de transporte nodemailer utilizando los detalles de autenticación proporcionados. En este caso, se utiliza el servicio de correo electrónico de Gmail y se proporcionan las credenciales de autenticación de la cuenta de correo electrónico a través de las variables de entorno process.env.COREO_TEST y process.env.PASS_CORREO.<br>
+
+    <br>sendMail: Esta función envía un correo electrónico de bienvenida al usuario proporcionado. La función utiliza el objeto de transporte creado por createtrans y envía un correo electrónico al usuario con el contenido de la plantilla HTML ubicada en la ruta templatePath1.<br>
+
+    <br>recoveryemail: Esta función envía un correo electrónico de recuperación de contraseña al usuario proporcionado. La función utiliza el objeto de transporte creado por createtrans y envía un correo electrónico al usuario con el contenido de la plantilla HTML ubicada en la ruta templatePath. El contenido de la plantilla se actualiza con el token de restablecimiento de contraseña proporcionado y se incluye como un enlace en el correo electrónico.<br>
+
+    <br>Las plantillas HTML se cargan en el archivo y se leen de forma síncrona utilizando la función fs.readFileSync. El contenido de la plantilla se actualiza dinámicamente utilizando la función replace, que reemplaza la cadena {{link}} en la plantilla con el token de restablecimiento de contraseña proporcionado.<br>
+
+    <br>Finalmente, la sendMail y la recoveryemail se exportan como funciones que se pueden usar en otras partes del código.</p>
+</section>

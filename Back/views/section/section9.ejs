@@ -1,4 +1,5 @@
-<section id="router" style="border-top: 1px solid gray">
+<section id="router" style="border-top: 1px solid gray;color: white;
+padding: 5%;">
   <div>
     <h3>Rutas</h3>
     <h4>Ruta principal de la conexion</h4>
@@ -23,7 +24,7 @@ console.log('cargar ruta---------->',fileWithOutExt)
 
 })
     </code></pre>
-    <p>
+    <p style="padding: 2%;  line-height: 30px;">
       En este archivo utilizamos el framework Express para crear un
       enrutador que maneja diferentes rutas. El código primero importa
       las dependencias necesarias, incluyendo Express y el módulo File
@@ -63,8 +64,7 @@ console.log('cargar ruta---------->',fileWithOutExt)
         border-radius: 10px;
         padding: 10px;
         color: white;
-      "
-    >
+        padding: 2%;  line-height: 30px;">
       <strong>Nota:</strong> Si deseas agregar nuevas rutas para nuevas
       funcionalidades de la api solo tienes que agrer otro archivo
       dentro de la carpeta routes con la configuración comun de rutas y
@@ -87,7 +87,7 @@ router.delete('/:id', checkAuth,checkRoleAuth(['admin']), deleteAlly)
 
 module.exports = router
     </code></pre>
-    <p>
+    <p style="padding: 2%;  line-height: 30px;">
       El código importa la dependencia Express y crea un objeto
       enrutador utilizando la función Router de Express. También importa
       algunos middlewares (checkAuth y checkRoleAuth) y algunas
@@ -184,7 +184,8 @@ httpError(res, e);
 module.exports= {getitem, getitems, createitem, updateitem, deleteitem}
 
     </code></pre>
-    <p>Este es un código en Node.js que exporta varias funciones para manejar diferentes solicitudes HTTP relacionadas con la manipulación de datos de usuarios.<br>
+    <p style="padding: 2%;  line-height: 30px;">
+      Este es un código en Node.js que exporta varias funciones para manejar diferentes solicitudes HTTP relacionadas con la manipulación de datos de usuarios.<br>
 
       <br>Las funciones controladoras son getitems, getitem, createitem, updateitem y deleteitem. Cada una de ellas maneja una operación diferente en la base de datos de usuarios.<br>
 

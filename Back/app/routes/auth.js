@@ -1,10 +1,12 @@
 const express = require('express')
 const router = express.Router()
+const { cacheInit } = require('../middleware/cache')
+
 
 const { registerCtrl, loginCtrl} = require('../controllers/authcontrollers')
 
 //login
-router.post('/login', loginCtrl)
+router.post('/login',cacheInit, loginCtrl)
 
 
 //new user

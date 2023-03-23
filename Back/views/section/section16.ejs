@@ -1,3 +1,8 @@
-<section id="correos2">
-  <h2>¿Como funciona la recuperación de contraseña?</h2>
+<section id="correos2" style="border-top: 1px solid gray;color: white;
+padding: 5%;">  <h2>¿Como funciona la recuperación de contraseña?</h2>
+  <p style="padding: 2%;  line-height: 30px;">
+    La recuperación de contraseña funciona de la siguiente manera:<br>
+  <br> Cuando el usuario intenta acceder con una contraseña incorrecta el sistema te envia un mensaje con la contraseña incorrecta, al tener 3 intentos fallidos este cambia el estado del usuario a DISABLE o desactivado y no le permite el ingreso al sistema <br>
+<br>Luego de que el estado del usuario es cambiado el envia un correo al usuario donde recibe una ruta que contiene un token de reseteo y abre una interfaz que le permite ingresar una nueva contraseña <br><br>Al ingresar la nueva contraseña el formulario de envio accede a otra ruta que resetea el usuario cambiando el estado a activo cambiando la contraseña y volviendo a 0 los intentos de ingreso <br>
+<br>Importante que el token solo tiene una duración de 5 min luego pasado ese tiempo debera solicitar de nuevo el correo para poder acceder al sistema</p>
 </section>

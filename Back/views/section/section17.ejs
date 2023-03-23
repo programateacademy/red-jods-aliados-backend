@@ -1,0 +1,36 @@
+<section id="cache" style="border-top: 1px solid gray; color: white;
+padding: 5%;">
+<h2>Cache</h2>
+<pre style="margin-top: 1%;"><code>
+  const getExpedditiousCache = require('express-expeditious');
+
+  const defaultOptions = {
+    namespace: 'expresscache',
+    defaultTtl: '1 minute',
+    statusCodeExpires:{
+      404: '5 minutes',
+      500: 0
+    }
+  }
+
+  const cacheInit = getExpedditiousCache(defaultOptions)
+
+  module.exports = {cacheInit}
+</code></pre>
+<p style="padding: 2%;  line-height: 30px;">
+  Este código utiliza el módulo express-expeditious para configurar y crear un middleware de caché en Express. <br>
+
+  <br>Primero, se importa la función getExpedditiousCache del módulo express-expeditious.<br>
+
+  <br>A continuación, se define un objeto llamado defaultOptions que contiene opciones de configuración para el middleware de caché.<br>
+
+  <br>defaultOptions tiene las siguientes propiedades:<br>
+
+  <br>namespace: es el nombre del espacio de caché. Si no se especifica, se utilizará el valor por defecto expresscache.<br>
+  <br>defaultTtl: es el tiempo de vida por defecto para los objetos en caché. Si no se especifica el tiempo, se utilizará el valor por defecto 1 minute.<br>
+  <br>statusCodeExpires: es un objeto que define el tiempo de vida para las respuestas que tengan un código de estado específico. En este ejemplo, se establece que las respuestas con un código de estado 404 tendrán un tiempo de vida de 5 minutes y las respuestas con un código de estado 500 no tendrán tiempo de vida.<br>
+  <br>Después, se llama a la función getExpedditiousCache con las opciones predeterminadas y se almacena el resultado en una constante llamada cacheInit.<br>
+  <br>Por último, se exporta el objeto cacheInit para que pueda ser utilizado como middleware de caché en otras partes de la aplicación.
+  <button><a href="https://github.com/evanshortiss/express-expeditious" target="_blank">Documentacion</a></button>
+</p>
+</section>

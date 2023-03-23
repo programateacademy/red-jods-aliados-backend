@@ -1,3 +1,78 @@
-<section id="bd" style="border-top: 1px solid gray">
+<section id="bd" style="border-top: 1px solid gray; color: white;
+padding: 5%;">
   <h3>Modelo de la base de datos:</h3>
+  <pre><code>
+    const mongoose = require('mongoose');
+
+    const aliadosSchema = new mongoose.Schema({
+        organization:{
+          type: String
+        },
+        ODS:{
+          type: String
+        },
+        img:{
+          type: String
+        },
+        phone:{
+          type: String
+        },
+        email:{
+          type: String
+        },
+        responsible: {
+          type: String
+        },
+        eje:{
+          type: String
+        },
+        description:{
+          type: String
+        },
+        objectives:{
+          type: String
+        },
+        date_start:{
+          type: String
+        },
+        date_end:{
+          type: String
+        },
+        resource:{
+          type: String
+        },
+        status:{
+          type: String
+        },
+        address:{
+          type: String
+        },
+        twitter:{
+          type: String
+        },
+        ig:{
+          type: String
+        },
+        fb:{
+          type: String
+        },
+        linkedin:{
+          type: String
+        }
+    },
+      {
+        timestamps: true, //fecha de creacion y modificacion
+        versionKey: false //quita el _V
+      })
+
+      module.exports = mongoose.model('aliados',aliadosSchema)
+  </code></pre>
+  <p style="padding: 2%;  line-height: 30px;">
+        Este código utiliza el módulo mongoose para definir un esquema de datos llamado aliadosSchema, que representa un modelo de datos de aliados. <br>
+    <br> el esquema tiene dos opciones particuales que son:
+    <br>timestamps: establece que se agregarán automáticamente campos createdAt y updatedAt en los documentos del modelo, que indican la fecha de creación y modificación.<br>
+    <br>versionKey: establece que el campo _v no será agregado en los documentos del modelo.<br>
+    <br>Por último, se exporta el modelo aliados, creado a partir del esquema aliadosSchema, para poder ser utilizado en otras partes de la aplicación. <br>
+    <br>Todos los modelos en ensencia manejan el mismo esquema.
+  </p>
 </section>

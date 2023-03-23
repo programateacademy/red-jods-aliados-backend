@@ -1,11 +1,13 @@
-<section id="mongo" style="border-top: 1px solid gray">
+<section id="mongo"  style="border-top: 1px solid gray;
+color: white;
+padding: 5%;">
   <h2>Configuración para la conexion con mongo atlas</h2>
-  <pre><code>
+  <pre style="margin-top: 1%;"><code>
 const mongoose = require('mongoose');
 
 mongoose.set('strictQuery', true);
 const dbConnect = ()=>{
-const DB_URI = process.env.DB_URI //Se conecta a la url
+const DB_URI = process.env.DB_URI <strong style="color: green;">//Se conecta a la url</strong>
 mongoose.connect(DB_URI, {
 useNewUrlParser: true,
 useUnifiedTopology: true
@@ -20,8 +22,8 @@ if(!err){
 }
 module.exports = { dbConnect }
   </code></pre>
-  <p>
-    En primer lugar, se importa el módulo mongoose con la línea const
+  <p style="padding: 2%;  line-height: 30px;">
+        En primer lugar, se importa el módulo mongoose con la línea const
     mongoose = require('mongoose');. <br />
     <br />Luego, se configura mongoose para que sea estricto en la
     validación de consultas a la base de datos con la línea

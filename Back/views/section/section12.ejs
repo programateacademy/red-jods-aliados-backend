@@ -1,4 +1,5 @@
-<section id="encriptar" style="border-top: 1px solid gray">
+<section id="encriptar" style="border-top: 1px solid gray;color: white;
+padding: 5%;">
   <h3>Función para encriptar contraseña</h3>
   <pre><code>
 const bcrypt = require('bcryptjs') //importar el encriptador
@@ -11,7 +12,8 @@ return await bcrypt.compare(passwordPlain, hashPassword)
 }
 module.exports = { encrypt, compare }
   </code></pre>
-  <p>Este código importa una biblioteca llamada "bcryptjs" que proporciona funciones para encriptar y comparar contraseñas. Luego define dos funciones llamadas "encrypt" y "compare" que se exportan al final del archivo.<br>
+  <p style="padding: 2%;  line-height: 30px;">
+    Este código importa una biblioteca llamada "bcryptjs" que proporciona funciones para encriptar y comparar contraseñas. Luego define dos funciones llamadas "encrypt" y "compare" que se exportan al final del archivo.<br>
 <br>La función "encrypt" toma una cadena sin formato como entrada y devuelve una promesa que resuelve con una cadena encriptada. El segundo argumento de la función "bcrypt.hash" es el número de rondas de encriptación que se deben utilizar.<br>
 <br>La función "compare" toma dos argumentos: una contraseña en texto plano y una contraseña encriptada. Devuelve una promesa que resuelve en verdadero si la contraseña en texto plano coincide con la contraseña encriptada. <button><a href="https://openbase.com/js/bcryptjs/documentation" target="_blank" style="text-decoration: none; color: white;">Documentacion de la biblioteca</a></button></p>
 </section>

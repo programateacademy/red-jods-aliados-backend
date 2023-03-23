@@ -1,3 +1,15 @@
-<section id="correos" style="border-top: 1px solid gray">
-  <h3>Funcion para enviar correos</h3>
+<section id="tokens2" style="border-top: 1px solid gray; color: white;
+padding: 5%;">
+  <h3>¿Como consumir el token de inicio de sesion desde el frontend?</h3>
+  <p style="padding: 2%;  line-height: 30px;">
+    El token es enviado mediante una respuesta cuando el usuario es tiene un inicio de sesion exitoso
+    con el nombre de <strong style="color: aqua;">tokenSession</strong> <br>
+    <br>Desde el frontend lo pueden recibir en una constante y este se obtiene de una respuesta a una
+    solicitud HTTP o de una función asincrónica
+    <pre><code>
+      const token = response.data.tokenSession;
+    </code></pre>
+    <p style="padding: 2%;  line-height: 30px;">
+    luego el token lo pueden guarda en el localstore como es el caso de la api y utilizarlo en cualquier peticion que hagas</p>
+  </p>
 </section>

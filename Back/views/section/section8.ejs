@@ -1,25 +1,26 @@
-<section id="mainconection" style="border-top: 1px solid gray">
+<section id="mainconection" style="border-top: 1px solid gray ;color: white;
+padding: 5%;">
   <h2>Archivo principal de la conexión</h2>
-  <pre><code>
-require('dotenv').config()//variables de entorno
+  <pre style="margin-top: 1%;"><code>
+require('dotenv').config() <strong style="color: green;">//variables de entorno</strong>
 const express = require('express')
 const cors = require('cors')
 const path =require('path')
 const app = express()
-const PORT = process.env.PORT || 3000 //puerto declarado en la variable de entorno
-const { dbConnect } = require('./config/mongo') //requiere la conexion
+const PORT = process.env.PORT || 3000 <strong style="color: green;">//puerto declarado en la variable de entorno</strong>
+const { dbConnect } = require('./config/mongo') <strong style="color: green;">//requiere la conexion</strong>
 
 app.use(cors())
-app.use(express.json()) //permite envie de datos
+app.use(express.json()) <strong style="color: green;">//permite envie de datos</strong>
 
-app.use('/', require('./app/routes')) //ruta de la api
+app.use('/', require('./app/routes')) <strong style="color: green;">//ruta de la api</strong>
 
 dbConnect()
-app.listen(PORT, ()=>{ //Api escuchando
+app.listen(PORT, ()=>{
 console.log('api lista por el puerto', PORT)
 })
   </code></pre>
-  <p>
+  <p style="padding: 2%;  line-height: 30px;">
     Primero, se importan los módulos dotenv, express, cors y path con
     las líneas require('dotenv').config(), const express =
     require('express'), const cors = require('cors') y const path

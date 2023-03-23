@@ -1,3 +1,58 @@
-<section id="tokens" style="border-top: 1px solid gray">
+<section id="tokens" style="border-top: 1px solid gray;color: white;
+padding: 5%;">
   <h3>Funcion para generar tokens</h3>
+  <pre><code>
+    const jwt = require('jsonwebtoken')
+
+    const tokenSign = async (user) => { //Genera Token
+        return jwt.sign(
+            {
+                _id: user._id,
+                role: user.role
+            },
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "2h",
+            }
+        );
+    }
+    const tokenReset = async (user) => {
+      return jwt.sign(
+          {
+              _id: user._id,
+          },
+          process.env.JWT_SECRET,
+          {
+              expiresIn: "5min",
+          }
+      );
+    }
+
+    const verifyToken = async (token) => {
+        try {
+            return jwt.verify(token, process.env.JWT_SECRET)
+        } catch (e) {
+            return null
+        }
+    }
+
+    const decodeSign = (token) => { //TODO: Verificar que el token sea valido y correcto
+        return jwt.decode(token, null)
+    }
+  </code></pre>
+  <p style="padding: 2%;  line-height: 30px;">
+    Este código utiliza el módulo jsonwebtoken para generar, verificar y decodificar tokens de autenticación. Los tokens son objetos codificados en formato JSON que se utilizan para autenticar y autorizar el acceso a recursos o servicios.<br>
+
+<br><strong>El código define cuatro funciones:</strong><br>
+
+<br><strong>tokenSign:</strong> esta función genera un token firmado para el usuario proporcionado. El token contiene el identificador único del usuario (_id) y su rol, y tiene una vigencia de dos horas.<br>
+
+<br><strong>tokenreset:</strong> esta función genera un token firmado para el usuario proporcionado, que se utiliza para restablecer su contraseña. El token contiene solo el identificador único del usuario (_id) y tiene una vigencia de cinco minutos.<br>
+
+<br><strong>verifyToken:</strong> esta función verifica si un token es válido y lo decodifica para devolver los datos que contiene. Si el token no es válido, la función devuelve null.<br>
+
+<br><strong>decodeSign:</strong> esta función decodifica un token sin verificar si es válido o no. Devuelve los datos que contiene el token.<br>
+
+<br>Todas estas funciones utilizan la clave secreta JWT_SECRET, que se debe configurar en la variable de entorno process.env.JWT_SECRET. Esta clave se utiliza para firmar y verificar los tokens y debe mantenerse en secreto para garantizar la seguridad del sistema.
+  </p>
 </section>

@@ -11,7 +11,13 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.get('/', (req, res)=>{
+  res.render('recovery');//conecta con la vista recovery
+})
 
+app.get('/', function(req, res){
+  res.render("public/fondo")
+})
 
 app.use(cors())
 app.use(express.json()) //permite envie de datos

@@ -54,7 +54,7 @@ donde se podran ver, editar, eliminar, los aliados que aqui se encuentran
 * Lesther Rey - Lider Backend - [Lesther1](https://github.com/Lesther1)
 *  Valentina Godoy - Team member Backend - [Valentina9911](https://github.com/Valentina9911)
 
- # Contribuidores
+#### Contribuidores
  
  *  Valentina Moreno - Lider Frontend - [valemorenodev](https://github.com/valemorenodev)
  *  Daniela Castillo - Lider tecnico Frontend - [dcstll](https://github.com/dcstll)

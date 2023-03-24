@@ -35,7 +35,7 @@ const createtrans =()=>{
   const info = await transporter.sendMail({
     from: '<lesthercrespo@gmail.com>', // sender address
     to: `${user.email}`, // list of receivers
-    html: template.replace('{{link}}', `http://localhost:3000/recovery/updatepass/${tokenReseto}`),
+    html: template.replace('{{link}}', `https://example-back-aliados.onrender.com/recovery/updatepass/${tokenReseto}`),
   });
   console.log("Message sent: %s", info.messageId , tokenReseto);
   return

@@ -10,7 +10,7 @@ router.post('/reset/:token', recoverycontroller );
 
 
 router.get('/updatepass/:token',checkAuth, (req, res) => {
-  const token = req.params.token
+  const token = req.params.token.toString();
   res.render("recovery",{url:token}) //respuesta
   console.log(token)
 });

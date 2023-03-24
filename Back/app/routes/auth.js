@@ -6,7 +6,7 @@ const { cacheInit } = require('../middleware/cache')
 const { registerCtrl, loginCtrl} = require('../controllers/authcontrollers')
 
 //login
-router.post('/login',cacheInit, loginCtrl)
+router.post('/login', loginCtrl)
 
 
 //new user

@@ -19,7 +19,7 @@ const tokenReset = async (user) => {
       },
       process.env.JWT_SECRET,
       {
-          expiresIn: "5min",
+          expiresIn: "15min",
       }
   );
 }

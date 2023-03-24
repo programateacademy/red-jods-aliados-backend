@@ -46,14 +46,20 @@ donde se podran ver, editar, eliminar, los aliados que aqui se encuentran
 7. Modificar Actividad
 8. Eliminar Actividad
 9. Generar tokens
-10. Recuperacion contraseñas
+10. Recuperación contraseñas
 11. Cache
 
 
 ### Autores ✒️ 
 * Lesther Rey - Lider Backend - [Lesther1](https://github.com/Lesther1)
 *  Valentina Godoy - Team member Backend - [Valentina9911](https://github.com/Valentina9911)
+
+ # Contribuidores
  
+ *  Valentina Moreno - Lider Frontend - [valemorenodev](https://github.com/valemorenodev)
+ *  Daniela Castillo - Lider tecnico Frontend - [dcstll](https://github.com/dcstll)
+ *  Alisson Alvarez - Scrum Master Frontend - [Alisoon Alvarez](https://github.com/AlissonAlvarez)
+ *  Grisel Pulvirenti - Team member Frontend - [gris1998](https://github.com/gris1998)
  
  
 ### License 📄 

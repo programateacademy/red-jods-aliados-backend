@@ -4,19 +4,48 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <style>
+         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap') ;
+
+    *{
+      font-family: 'Poppins', sans-serif;
+    }
+    button:hover{
+      background-color: #fd5e53;
+    }
+  </style>
+  <title>Recuperar contraseña</title>
 </head>
-<body>
+<body style="background-color: #EDF5FC;
+display: flex;
+justify-content: center;">
 
+  <div style="
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 50vh;
+  background-color: white;
+  border-radius: 10px;
+  ">
   <h1>Reestablecer contraseña</h1>
-
-  <div>
-  <form action="/recovery/reset/<%=url%>" method="POST">
+  <form action="/recovery/reset/<%=url%>" method="POST" style=
+    "flex-direction: column; ">
+    <div>
     <label for="pass" >Nueva Contraseña:</label>
-    <input id="pass" name="pass" placeholder="Contraseña" required>
-
-    <button type="submit">Actualizar Contraseña</button>
+    <input id="pass" name="pass" placeholder="Contraseña" required style="border-radius: 10px; padding: 10px;">
   </div>
-
+    <button type="submit" style=
+    "width: 100%;
+    cursor: pointer;
+     margin-top: 10px;
+     border-radius: 30px;
+     padding: 10px;
+     background-color: #F9AF28;">Actualizar Contraseña</button>
+  </div>
+</form>
 </body>
 </html>

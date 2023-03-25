@@ -7,7 +7,7 @@ const { cacheInit } = require('../middleware/cache')
 
 
 router.get('/', checkAuthtoken,checkRoleAuth(['admin']), cacheInit, getitems)
-router.get('/:id',checkAuthtoken,checkRoleAuth(['admin']), cacheInit, getitem)
+router.get('/:id',checkAuthtoken,checkRoleAuth(['admin','user']), cacheInit, getitem)
 router.post('/',checkAuthtoken,checkRoleAuth(['admin']), createitem)
 router.patch('/:id', checkAuthtoken,checkRoleAuth(['admin']), updateitem)
 router.delete('/:id', checkAuthtoken,checkRoleAuth(['admin']), deleteitem)

@@ -11,14 +11,14 @@ const recoverycontroller = async (req, res) =>{
       const decoded = await verifyToken(token);
 
       if (!decoded) {
-        return res.status(400).send({ message: 'Invalid token' });
+        return res.status(400).send("<script>alert('Acceso vencido o invalido vuelve a solicitar');window.close()</script>");
       }
 
       // Buscar el usuario asociado al token
       const user = await userModel.findById(decoded._id);
 
       if (!user) {
-        return res.status(400).send({ message: 'User not found' });
+        return res.status(400).send("<script>alert('usuario no encontrodo');window.close()</script>");
       }
 
       // Actualizar la contraseña del usuario
@@ -30,7 +30,7 @@ const recoverycontroller = async (req, res) =>{
       user.tokenExpirationDate = tokenExpirationDate;
       await user.save();
 
-      res.send({ message: 'Password reset successfully' });
+      res.send("<script>alert('Contraseña cambiada correctamente');window.close()</script>");
     } catch (err) {
       console.log(err);
       res.status(500).send({ message: 'Internal server error e' });
